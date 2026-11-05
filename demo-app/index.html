@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Demo Shop - Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="box">
+    <h1 class="login_logo">Demo Shop</h1>
+    <form id="login-form" novalidate>
+      <input id="user-name" name="user-name" data-test="username" placeholder="Username" autocomplete="off">
+      <input id="password" name="password" data-test="password" type="password" placeholder="Password">
+      <h3 id="error" data-test="error" class="error" hidden></h3>
+      <input id="login-button" data-test="login-button" type="submit" value="Login">
+    </form>
+    <p class="hint">Accepted usernames: <b>standard_user</b>, <b>locked_out_user</b><br>
+      Password for all users: <b>secret_sauce</b></p>
+    <p class="hint"><a id="register-link" href="register.html">Register (age check)</a></p>
+  </div>
+<script>
+const USERS = ['standard_user', 'locked_out_user'];
+document.getElementById('login-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const u = document.getElementById('user-name').value.trim();
+  const p = document.getElementById('password').value;
+  const err = document.getElementById('error');
+  let msg = '';
+  if (!u) msg = 'Epic sadface: Username is required';
+  else if (!p) msg = 'Epic sadface: Password is required';
+  else if (!USERS.includes(u) || p !== 'secret_sauce')
+    msg = 'Epic sadface: Username and password do not match any user in this service';
+  else if (u === 'locked_out_user') msg = 'Epic sadface: Sorry, this user has been locked out.';
+  if (msg) { err.textContent = msg; err.hidden = false; return; }
+  sessionStorage.setItem('user', u);
+  location.href = 'inventory.html';
+});
+</script>
+</body>
+</html>

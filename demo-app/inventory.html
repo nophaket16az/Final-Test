@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Demo Shop - Products</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <span class="title" data-test="title">Products</span>
+    <a class="shopping_cart_link" data-test="shopping-cart-link">Cart
+      <span class="shopping_cart_badge" data-test="shopping-cart-badge" hidden>0</span></a>
+    <button id="logout" data-test="logout">Logout</button>
+  </div>
+  <div class="inventory_list">
+    <div class="inventory_item">
+      <div class="inventory_item_name">Sauce Labs Backpack</div><div class="price">$29.99</div>
+      <button id="add-to-cart-sauce-labs-backpack" data-test="add-to-cart-sauce-labs-backpack" class="add">Add to cart</button>
+    </div>
+    <div class="inventory_item">
+      <div class="inventory_item_name">Sauce Labs Bike Light</div><div class="price">$9.99</div>
+      <button id="add-to-cart-sauce-labs-bike-light" data-test="add-to-cart-sauce-labs-bike-light" class="add">Add to cart</button>
+    </div>
+  </div>
+<script>
+if (!sessionStorage.getItem('user')) location.href = 'index.html';
+let count = 0;
+const badge = document.querySelector('.shopping_cart_badge');
+document.querySelectorAll('button.add').forEach((b) => b.addEventListener('click', () => {
+  const adding = b.textContent === 'Add to cart';
+  count += adding ? 1 : -1;
+  b.textContent = adding ? 'Remove' : 'Add to cart';
+  badge.textContent = count; badge.hidden = count === 0;
+}));
+document.getElementById('logout').addEventListener('click', () => {
+  sessionStorage.removeItem('user'); location.href = 'index.html';
+});
+</script>
+</body>
+</html>

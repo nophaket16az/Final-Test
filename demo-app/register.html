@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Demo Shop - Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="box">
+    <h1>Register</h1>
+    <p class="hint">Rule: age must be a whole number between 18 and 60</p>
+    <form id="register-form" novalidate>
+      <input id="age" name="age" data-test="age" placeholder="Age">
+      <input id="submit" data-test="submit" type="submit" value="Submit">
+    </form>
+    <p id="result" data-test="result"></p>
+    <p class="hint"><a href="index.html">Back to login</a></p>
+  </div>
+<script>
+document.getElementById('register-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const raw = document.getElementById('age').value.trim();
+  const out = document.getElementById('result');
+  if (raw === '') out.textContent = 'Age is required';
+  else if (!/^\d+$/.test(raw)) out.textContent = 'Age must be a number';
+  else {
+    const age = Number(raw);
+    out.textContent = (age >= 18 && age <= 60) ? 'Valid age' : 'Age must be between 18 and 60';
+  }
+});
+</script>
+</body>
+</html>

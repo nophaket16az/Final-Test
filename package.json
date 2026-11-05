@@ -1,0 +1,10 @@
+{
+  "name": "automate-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "python -m http.server 8000 --directory demo-app",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --spec \"cypress/e2e/*.cy.js\""
+  }
+}

@@ -1,0 +1,6 @@
+selenium
+playwright
+robotframework
+robotframework-seleniumlibrary
+pytest
+pytest-playwright
